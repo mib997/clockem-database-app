@@ -1,3 +1,10 @@
+/**
+@author: Malik Bellamy
+This file contains the code to connect to the SQL database. 
+**/
+
+
+
 import java.sql.*;
 
 public class DatabaseConnector {
@@ -6,6 +13,7 @@ public class DatabaseConnector {
     static final String USER = "root";
     static final String PASS = "";
 
+    /*Constructor that connects to the SQL database and allows the user to enter the user data. */
     public DatabaseConnector(PersonInfo p){
 
         String query = "INSERT INTO person_id_info(FirstName, LastName, Date_of_Birth, " +
@@ -32,6 +40,8 @@ public class DatabaseConnector {
             throw new RuntimeException(e);
         }
     }
+
+    /* Static method that allows the user to retrieve the data from the database*/
 
     public static void retrieveData(String data) throws SQLException {
         final String DB_URL = "jdbc:mysql://localhost:3306/id_management_lookup";
