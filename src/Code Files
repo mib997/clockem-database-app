@@ -1,0 +1,45 @@
+info = new PersonInfo(FIRST_NAME, LAST_NAME, DOB_INFO, country, age);
+infoList.add(info);
+
+for (PersonInfo i : infoList){
+    System.out.println(i);
+        }
+
+
+ps.setString(1, firstName);
+                ps.setString(2, lastName);
+                ps.setString(3, dob);
+                ps.setString(4, country);
+                String Age = Integer.toString(age);
+                ps.setString(5, Age);
+
+                ps.addBatch();
+
+
+public DatabaseConnector(String firstName, String lastName, String dob, String country,
+                             int age){
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement st = con.createStatement();
+            /*System.out.println("Connection established successfully!");*/
+
+            String query = "INSERT INTO person_id_info(FirstName, LastName, Date_of_Birth, " +
+                    "Country, Age) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, firstName);
+            ps.setString(2, lastName);
+            ps.setString(3, dob);
+            ps.setString(4, country);
+            String Age = Integer.toString(age);
+            ps.setString(5, Age);
+
+            ps.addBatch();
+            ps.executeBatch();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
