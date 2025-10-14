@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class SQLDatabase {
     static final String DB_URL = "jdbc:mysql://localhost:3306/id_management_lookup";
     static final String USER = "root";
-    static final String PASS = "Immavegeta1997@";
+    static final String PASS = "@";
     public static void main(String[] args) {
 
         Connection connection = null;
