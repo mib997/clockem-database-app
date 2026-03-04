@@ -1,7 +1,10 @@
+/**
+ * This file is the main file that prompts the user for the
+ * individual's details.
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,6 +13,7 @@ import java.util.Scanner;
 
 public class Main {
 
+    /* Helper method to validate that input consists of letters. */
     public static boolean validateLetters(String string){
         if (string == null || string.isEmpty()){
             return false;
@@ -22,6 +26,7 @@ public class Main {
         return false;
     }
 
+    /* Helper method checks if the date of birth is in the correct format. */
     public static boolean checkDOB(String dob){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         try {
@@ -31,7 +36,12 @@ public class Main {
             return false;
         }
     }
-    public static void main(String[] args) {
+
+    public static void retrieveData(String user, String password) throws SQLException {
+        DatabaseConnector.retrieveData(user, password);
+    }
+
+    public static void enterDetails(DatabaseConnector con) throws SQLException {
 
         PersonInfo info;
         ArrayList<PersonInfo> infoList = new ArrayList<>();
@@ -39,7 +49,6 @@ public class Main {
         System.out.println("_____________________________________________________________");
         System.out.println("Welcome to the Person ID Database Management System!");
         System.out.println("_____________________________________________________________");
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("How many people would you like to add to the database?: ");
@@ -88,13 +97,41 @@ public class Main {
             info = new PersonInfo(FIRST_NAME, LAST_NAME, DOB_INFO, country);
             infoList.add(info);
 
-            for (PersonInfo p : infoList){
-                System.out.println(p);
-            }
+            con.insertData(info);
         }
-
         scanString.close();
         scanner.close();
+    }
+
+    public static void select(){
+        System.out.println("Enter data: 1");
+        System.out.println("Retrieve data: 2");
+        System.out.println("Exit: 0");
+    }
+
+    public static void main(String[] args) throws SQLException {
+        /*System.out.println("_____________________________________________________________");
+        System.out.println("Welcome to the Person ID Database Management System!");
+        System.out.println("_____________________________________________________________");
+
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter your username: ");
+        String userName = scanner.nextLine();
+        System.out.println("Please enter your password: ");
+        String password = scanner.nextLine();
+
+       DatabaseConnector connector = new DatabaseConnector(userName, password);
+
+       select();
+
+        System.out.println("Select what you want to do: ");
+        int option = scanner.nextInt();
+        */
+        String userName = "root";
+        String password = "Immavegeta1997@";
+
+        retrieveData(userName, password);
 
     }
 }
