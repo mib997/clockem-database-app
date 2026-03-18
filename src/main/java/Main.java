@@ -110,28 +110,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws SQLException {
-        /*System.out.println("_____________________________________________________________");
-        System.out.println("Welcome to the Person ID Database Management System!");
-        System.out.println("_____________________________________________________________");
 
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter your username: ");
-        String userName = scanner.nextLine();
-        System.out.println("Please enter your password: ");
-        String password = scanner.nextLine();
-
-       DatabaseConnector connector = new DatabaseConnector(userName, password);
-
-       select();
-
-        System.out.println("Select what you want to do: ");
-        int option = scanner.nextInt();
-        */
-        String userName = "root";
-        String password = "Immavegeta1997@";
-
-        retrieveData(userName, password);
 
     }
 }
