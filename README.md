@@ -20,6 +20,6 @@ A desktop application built with JavaFX and MySQL that allows users to:
 - Database integration
 
 ## Future Improvements
-- Selenium integration for case search
+- State case search feature
 - AI validation assistant
 - CSV export
