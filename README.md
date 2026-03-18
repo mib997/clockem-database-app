@@ -1,6 +1,8 @@
 # Clock 'em App
 
-A desktop application built with JavaFX and MySQL that allows users to:
+A desktop application designed to keep records on people that one has met, including friends, colleagues, dates, etc.
+
+Features include:
 
 - Add, update, and delete person records
 - Search and filter data
