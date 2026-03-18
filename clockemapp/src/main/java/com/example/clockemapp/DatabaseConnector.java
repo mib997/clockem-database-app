@@ -1,7 +1,4 @@
-package com.example.clockemapp; /**
-@author: Malik Bellamy
-This file contains the code to connect to the SQL database. 
-**/
+package com.example.clockemapp;
 
 import java.sql.*;
 import java.util.ArrayList;
