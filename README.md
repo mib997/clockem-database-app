@@ -1,4 +1,25 @@
-This application is the prototype of a user database management system written in the Java programming language. 
-It will prompt the user to enter in details (name, date of birth, country), and that information will be stored in
-a SQL database. Once the data is stored, it will then allow a user to search for the individual, and all the data 
-they entered will be retrieved. 
+# Clock 'em App
+
+A desktop application built with JavaFX and MySQL that allows users to:
+
+- Add, update, and delete person records
+- Search and filter data
+- View records in a table
+- Validate user input
+
+## Technologies Used
+- Java
+- JavaFX
+- MySQL
+- Maven
+
+## Features
+- CRUD operations
+- Search functionality
+- UI form validation
+- Database integration
+
+## Future Improvements
+- Selenium integration for case search
+- AI validation assistant
+- CSV export
