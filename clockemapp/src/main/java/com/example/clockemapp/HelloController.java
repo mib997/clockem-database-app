@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import java.sql.SQLException;
 
@@ -33,8 +35,8 @@ public class HelloController {
 
     private ObservableList<PersonInfo> people = FXCollections.observableArrayList();
 
-    String username = "";
-    String password = "";
+    String username = "root";
+    String password = "Immavegeta1997@";
 
     @FXML
     public void initialize(){
@@ -42,6 +44,8 @@ public class HelloController {
         try{
             connector = new DatabaseConnector(username, password);
             messageLabel.setText("Connected to database.");
+            /* MarylandCaseSearch search = new MarylandCaseSearch();
+            search.openSite();*/
         } catch (Exception e){
             messageLabel.setText("Database connection failed.");
             e.printStackTrace();
@@ -221,5 +225,46 @@ public class HelloController {
         messageLabel.setText("Showing all records");
     }
 
+    @FXML
+    public void ExportCSV(){
+        try(FileWriter file = new FileWriter("clockem_export.csv")){
 
+            file.append("First Name,Last Name,DOB,Country");
+
+            for (PersonInfo p : people){
+                file.append(p.getFirstName()).append(",");
+                file.append(p.getLastName()).append(",");
+                file.append(p.getDOB()).append(",");
+                file.append(p.getCountry()).append("\n");
+            }
+
+            messageLabel.setText("Data exported successfully");
+        } catch (IOException e) {
+            messageLabel.setText("Export unsuccessful");
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    public void MDCaseSearch(){
+
+        String firstName, lastName;
+
+        firstName = firstNameField.getText().trim();
+        lastName = lastNameField.getText().trim();
+
+        if (firstName.isEmpty() || lastName.isEmpty()){
+            messageLabel.setText("The fields are empty");
+            return;
+        }
+
+        try{
+            MarylandCaseSearch search = new MarylandCaseSearch();
+            search.openSite();
+        } catch (Exception e){
+            messageLabel.setText("Case search did not open");
+            e.printStackTrace();
+        }
+    }
 }

@@ -42,6 +42,8 @@
         <Button text="Add Person" onAction="#AddPerson"/>
         <Button text="Delete Person" onAction="#DeletePerson"/>
         <Button text="Update Person" onAction="#UpdatePerson"/>
+        <Button text="Export to CSV" onAction="#ExportCSV"/>
+        <Button text="Maryland Case Search" onAction="#MDCaseSearch"/>
     </HBox>
 
     <HBox spacing="10" alignment="CENTER">
