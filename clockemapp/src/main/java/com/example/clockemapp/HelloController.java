@@ -35,8 +35,8 @@ public class HelloController {
 
     private ObservableList<PersonInfo> people = FXCollections.observableArrayList();
 
-    String username = "root";
-    String password = "Immavegeta1997@";
+    String username = "";
+    String password = "";
 
     @FXML
     public void initialize(){
