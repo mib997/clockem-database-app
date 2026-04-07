@@ -22,7 +22,7 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Person Database Form"/>
+    <Label text="Clock 'em!"/>
 
     <GridPane hgap="10" vgap="10">
         <Label text="First Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
@@ -44,6 +44,7 @@
         <Button text="Update Person" onAction="#UpdatePerson"/>
         <Button text="Export to CSV" onAction="#ExportCSV"/>
         <Button text="Maryland Case Search" onAction="#MDCaseSearch"/>
+        <Button text="Log out" onAction="#logoutButton"/>
     </HBox>
 
     <HBox spacing="10" alignment="CENTER">

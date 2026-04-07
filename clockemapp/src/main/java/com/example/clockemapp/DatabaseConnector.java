@@ -3,12 +3,23 @@ package com.example.clockemapp;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * DatabaseConnector is responsible for interacting with a MySQL database to manage
+ * person records. This class provides methods to insert, retrieve, update, and delete
+ * person information in the database. It uses JDBC for database connection and operations.
+ *
+ * The database connection is initialized through the constructor which accepts a username
+ * and password for the database credentials. The class is designed to handle a specific
+ * table named `person_id_info`.
+ *
+ * A static block is included to ensure the MySQL JDBC Driver is loaded before any database
+ * operation is performed.
+ */
 public class DatabaseConnector {
 
-    static final String DB_URL = "jdbc:mysql://localhost:3306/id_management_lookup";
 
-    private final Connection con;
-    private final PreparedStatement insertStmt;
+    private Connection connection;
+    private PreparedStatement insertStmt;
 
     static{
         try{
@@ -20,12 +31,18 @@ public class DatabaseConnector {
 
     /*Constructor that connects to the SQL database */
     public DatabaseConnector(String userName, String password) throws SQLException {
-        this.con = DriverManager.getConnection(DB_URL, userName, password);
 
-        String query = "INSERT INTO person_id_info(FirstName, LastName, Date_of_Birth, " +
-                "Country, Age) VALUES (?, ?, ?, ?, ?)";
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/id_management_lookup",
+                    userName,
+                    password
+            );
 
-        this.insertStmt = con.prepareStatement(query);
+            String insertQuery = "INSERT INTO person_id_info (FirstName, LastName, " +
+                    "Date_of_Birth, Country, Age) VALUES (?, ?, ?, ?, ?)";
+            insertStmt = connection.prepareStatement(insertQuery);
+
+
     }
 
     public void insertData(PersonInfo p) throws SQLException{
@@ -34,21 +51,18 @@ public class DatabaseConnector {
             insertStmt.setString(2, p.getLastName());
             insertStmt.setString(3, p.getDOB());
             insertStmt.setString(4, p.getCountry());
-            insertStmt.setString(5, p.calculateAge());
+            insertStmt.setString(5, p.getAge());
 
             insertStmt.executeUpdate();
 
     }
-
-    /* Static method that allows the user to retrieve the data from the database.
-     */
 
     public ArrayList<PersonInfo> retrieveData() throws SQLException{
         ArrayList<PersonInfo> people = new ArrayList<>();
 
         String query = "SELECT * FROM person_id_info";
 
-        try(Statement stmt = con.createStatement();
+        try(Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query)){
             while (rs.next()){
                 String firstName = rs.getString("FirstName");
@@ -68,7 +82,7 @@ public class DatabaseConnector {
         String query = "DELETE FROM person_id_info WHERE FirstName = ? AND LastName = ? " +
                 "AND Date_of_Birth = ? AND Country = ?";
 
-        try (PreparedStatement stmt = con.prepareStatement(query)){
+        try (PreparedStatement stmt = connection.prepareStatement(query)){
             stmt.setString(1, person.getFirstName());
             stmt.setString(2, person.getLastName());
             stmt.setString(3, person.getDOB());
@@ -84,7 +98,7 @@ public class DatabaseConnector {
         String query = "UPDATE person_id_info SET FirstName = ?, LastName = ?, Date_of_Birth = ?, Country = ? " +
                 "WHERE FirstName = ? AND LastName = ? AND Date_of_Birth = ? AND Country = ?";
 
-        try (PreparedStatement stmt = con.prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, newPerson.getFirstName());
             stmt.setString(2, newPerson.getLastName());
             stmt.setString(3, newPerson.getDOB());
