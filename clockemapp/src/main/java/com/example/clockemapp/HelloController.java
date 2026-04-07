@@ -1,11 +1,7 @@
 package com.example.clockemapp;
 
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableView;
@@ -15,22 +11,11 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
-
 import java.io.FileWriter;
 import java.io.IOException;
 
 import java.sql.SQLException;
 
-
-/**
- * HelloController is a JavaFX controller class that manages interactions between the user and the application's
- * interface for maintaining a database of people. It provides functionality for adding, updating, deleting, and
- * searching people, as well as exporting data and external website interactions.
- *
- * The class leverages JavaFX features such as FXML annotations to bind UI elements, TableView for displaying data,
- * and TextField for user input. It also integrates with a database to persist data and retrieve records dynamically.
- */
 public class HelloController {
 
     @FXML
@@ -50,17 +35,17 @@ public class HelloController {
 
     private ObservableList<PersonInfo> people = FXCollections.observableArrayList();
 
-    String username = "";
-    String password = "";
+    String username = "root";
+    String password = "Immavegeta1997@";
 
     @FXML
     public void initialize(){
 
         try{
-
             connector = new DatabaseConnector(username, password);
             messageLabel.setText("Connected to database.");
-
+            /* MarylandCaseSearch search = new MarylandCaseSearch();
+            search.openSite();*/
         } catch (Exception e){
             messageLabel.setText("Database connection failed.");
             e.printStackTrace();
@@ -73,7 +58,9 @@ public class HelloController {
 
         personTable.setItems(people);
         loadPeopleFromDatabase();
+
     }
+
 
     @FXML
     private void AddPerson(){
@@ -112,7 +99,6 @@ public class HelloController {
         );
     }
 
-
     private void loadPeopleFromDatabase(){
         try{
             people.clear();
@@ -122,7 +108,6 @@ public class HelloController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void tableClick(){
@@ -135,7 +120,6 @@ public class HelloController {
             countryField.setText(p.getCountry());
         }
     }
-
 
     @FXML
     private void DeletePerson(){
@@ -164,7 +148,6 @@ public class HelloController {
         }
 
     }
-
 
     @FXML
     private void UpdatePerson(){
@@ -208,7 +191,6 @@ public class HelloController {
             }
         }
     }
-
 
     @FXML
     public void searchButton() {
@@ -282,22 +264,6 @@ public class HelloController {
             search.openSite();
         } catch (Exception e){
             messageLabel.setText("Case search did not open");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void logoutButton() {
-
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-page.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) personTable.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Login");
-            stage.show();
-        } catch (Exception e){
             e.printStackTrace();
         }
     }
