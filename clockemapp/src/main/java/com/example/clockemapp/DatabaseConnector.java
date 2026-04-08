@@ -29,7 +29,6 @@ public class DatabaseConnector {
         }
     }
 
-    /*Constructor that connects to the SQL database */
     public DatabaseConnector(String userName, String password) throws SQLException {
 
             connection = DriverManager.getConnection(

@@ -16,6 +16,13 @@ import java.io.IOException;
 
 import java.sql.SQLException;
 
+/**
+ * The HelloController class is a JavaFX controller responsible for managing
+ * and interacting with the user interface components of a CRUD application
+ * for managing personal information. The class facilitates user interaction,
+ * connects to a database, and performs various operations such as adding,
+ * updating, deleting, searching, and exporting data.
+ */
 public class HelloController {
 
     @FXML
@@ -36,7 +43,7 @@ public class HelloController {
     private ObservableList<PersonInfo> people = FXCollections.observableArrayList();
 
     String username = "root";
-    String password = "Immavegeta1997@";
+    String password = "";
 
     @FXML
     public void initialize(){
