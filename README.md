@@ -22,6 +22,5 @@ Features include:
 - Database integration
 
 ## Future Improvements
-- State case search feature
 - AI validation assistant
-- CSV export
+
